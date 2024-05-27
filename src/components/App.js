@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import "../styles/App.css";
 
 class App extends Component {
@@ -11,22 +11,33 @@ class App extends Component {
     };
   }
 
+  removeCommonCharacters = (str1, str2) => {
+    let str1Arr = str1.split("");
+    let str2Arr = str2.split("");
+
+    str1Arr.forEach((char) => {
+      const indexInStr2 = str2Arr.indexOf(char);
+      if (indexInStr2 !== -1) {
+        str2Arr[indexInStr2] = "";
+        str1Arr[str1Arr.indexOf(char)] = "";
+      }
+    });
+
+    const remainingStr1 = str1Arr.filter((char) => char !== "").join("");
+    const remainingStr2 = str2Arr.filter((char) => char !== "").join("");
+
+    return { remainingStr1, remainingStr2 };
+  };
+
   calculateRelationship = () => {
     const { name1, name2 } = this.state;
 
-    const lowercaseName1 = name1.toLowerCase();
-    const lowercaseName2 = name2.toLowerCase();
+    const { remainingStr1, remainingStr2 } = this.removeCommonCharacters(
+      name1,
+      name2
+    );
 
-    let remainingName1 = lowercaseName1
-      .split("")
-      .filter((char) => !lowercaseName2.includes(char))
-      .join("");
-    let remainingName2 = lowercaseName2
-      .split("")
-      .filter((char) => !lowercaseName1.includes(char))
-      .join("");
-
-    const sumOfLengths = (remainingName1.length + remainingName2.length) % 6;
+    const sumOfLengths = (remainingStr1.length + remainingStr2.length) % 6;
 
     let relationshipStatus = "";
     switch (sumOfLengths) {
