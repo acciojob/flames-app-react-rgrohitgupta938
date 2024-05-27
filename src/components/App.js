@@ -68,7 +68,7 @@ class App extends Component {
           <input
             type="text"
             id="input1"
-            name="input1"
+            name="name1"
             value={name1}
             onChange={(e) => this.setState({ name1: e.target.value })}
             data-testid="input1"
@@ -76,7 +76,7 @@ class App extends Component {
 
           <input
             type="text"
-            name="input2"
+            name="name2"
             id="input2"
             value={name2}
             onChange={(e) => this.setState({ name2: e.target.value })}
