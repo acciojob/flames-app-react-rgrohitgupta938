@@ -26,7 +26,6 @@ class App extends Component {
       .filter((char) => !lowercaseName1.includes(char))
       .join("");
 
-
     const sumOfLengths = (remainingName1.length + remainingName2.length) % 6;
 
     let relationshipStatus = "";
@@ -53,7 +52,6 @@ class App extends Component {
         relationshipStatus = "Please Enter valid input";
     }
 
-
     this.setState({ relationship: relationshipStatus });
   };
 
@@ -70,15 +68,19 @@ class App extends Component {
           <input
             type="text"
             id="input1"
+            name="input1"
             value={name1}
             onChange={(e) => this.setState({ name1: e.target.value })}
+            data-testid="input1"
           />
 
           <input
             type="text"
+            name="input2"
             id="input2"
             value={name2}
             onChange={(e) => this.setState({ name2: e.target.value })}
+            data-testid="input2"
           />
 
           <button
